@@ -1,6 +1,8 @@
 #include "main.h"
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
 /**
  * print_char - writes the character c to stdout
  * @arg: argument
@@ -80,24 +82,6 @@ int print_unsigned(va_list arg)
 		_putchar('0' + resp);
 	}
 	return (i + 1);
-}
-
-/*  -> derived function <- */
-
-/**
- * print_unsignedToBinary - prints an integer
- * @arg: argument
- * Return: 0
- */
-
-int print_unsignedToBinary(va_list arg)
-{
-	unsigned int n = va_arg(arg, unsigned int);
-	unsigned int printed;
-
-	print_binary(n, &printed);
-	print_binary(n, &printed);
-	return (printed);
 }
 
 
