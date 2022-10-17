@@ -23,7 +23,12 @@ int print_hex(va_list arg);
 int print_HEX(va_list arg);
 int print_STR (va_list arg);
 
-
+/*Helper functions*/
+unsigned int base_len(unsigned int, int);
+char *rev_string(char *);
+void write_base(char *str);
+char *_memcpy(char *dest, char *src, unsigned int n);
+int print_unsgined_number(unsigned int);
 /**
  * struct SpecifiersStruct - structure definition of ai printTypeStruct
  * @con_Specifiers: conversion Specifiers
