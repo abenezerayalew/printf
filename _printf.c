@@ -5,14 +5,16 @@
 /**
  * printIdentifiers - prints special characters
  * @next: character after the %
- * @arg: argument for the con_Specifiers
+ * @arg: argument for the indentifier
  * Return: the number of characters printed
+ * (excluding the null byte used to end output to strings)
  */
+
 int printIdentifiers(char next, va_list arg)
 {
-	int funIndex;
+	int functsIndex;
 
-	printTypeS fun[] = {
+	identifierStruct functs[] = {
 		{"c", print_char},
 		{"s", print_str},
 		{"d", print_int},
@@ -23,16 +25,13 @@ int printIdentifiers(char next, va_list arg)
 		{"x", print_hex},
 		{"X", print_HEX},
 		{"S", print_STR},
-		/*{"r", print_reversed},*/
-		/*{"R", rot13},*/
-		/*{"%", print_percent},*/
 		{NULL, NULL}
 	};
 
-	for (funIndex = 0; fun[funIndex].con_Specifiers != NULL; funIndex++)
+	for (functsIndex = 0; functs[functsIndex].indentifier != NULL; functsIndex++)
 	{
-		if (fun[funIndex].con_Specifiers[0] == next)
-			return (fun[funIndex].printer(arg));
+		if (functs[functsIndex].indentifier[0] == next)
+			return (functs[functsIndex].printer(arg));
 	}
 	return (0);
 }
@@ -43,7 +42,7 @@ int printIdentifiers(char next, va_list arg)
  * write output to stdout, the standard output stream
  * @format: character string composed of zero or more directives
  *
- *  Return: the number of characters printed
+ * Return: the number of characters printed
  * (excluding the null byte used to end output to strings)
  * return -1 for incomplete identifier error
  */
