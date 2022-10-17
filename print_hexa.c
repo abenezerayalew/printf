@@ -1,36 +1,110 @@
-#include "main.h"
 
 /**
- * print_hex_base - base functions for printing hexadecimal numbers
- * @arg: argument list containing hexadecimal
- * @_case: a in caps on lower, printing the hex number in caps in lower
- * Return: number of digits printed
- */
-int print_hex_base(va_list arg, char _case)
-{
-	unsigned int num = va_arg(arg, unsigned int);
-	int nbrCharacters;
-
-	if (num == 0)
-		return (_putchar('0'));
-	nbrCharacters = print_unsignedIntToHex(num, _case);
-	return (nbrCharacters);
-}
-/**
- * print_hex - prints a hexadecimal in lower case
- * @arg: list that contains hexadecimal to print
- * Return: number of digits printed
+ * print_hex - Prints a representation of a decimal number on base16 lowercase
+ * @list: List of the arguments passed to the function
+ * Return: Number of characters printed
  */
 int print_hex(va_list arg)
 {
-	return (print_hex_base(arg, 'a'));
+	unsigned int num;
+	int len;
+	int rem_num;
+	char *hex_rep;
+	char *rev_hex;
+
+	num = va_arg(list, unsigned int);
+
+	if (num == 0)
+		return (_write_char('0'));
+	if (num < 1)
+		return (-1);
+	len = base_len(num, 16);
+	hex_rep = malloc(sizeof(char) * len + 1);
+	if (hex_rep == NULL)
+		return (-1);
+	for (len = 0; num > 0; len++)
+	{
+		rem_num = num % 16;
+		if (rem_num > 9)
+		{
+			rem_num = hex_check(rem_num, 'x');
+			hex_rep[len] = rem_num;
+		}
+		else
+			hex_rep[len] = rem_num + 48;
+		num = num / 16;
+	}
+	hex_rep[len] = '\0';
+	rev_hex = rev_string(hex_rep);
+	if (rev_hex == NULL)
+		return (-1);
+	write_base(rev_hex);
+	free(hex_rep);
+	free(rev_hex);
+	return (len);
 }
+
+
 /**
- * print_HEX - prints a hexadecimal in upper case
- * @arg: list that contains hexadecimal to print
- * Return: number of digits printed
+ * print_heX - Prints a representation of a decimal number on base16 Uppercase
+ * @list: List of the arguments passed to the function
+ * Return: Number of characters printed
  */
-int print_HEX(va_list arg)
+int print_heX(va_list arg)
 {
-	return (print_hex_base(arg, 'A'));
+	unsigned int num;
+	int len;
+	int rem_num;
+	char *hex_rep;
+	char *rev_hex;
+
+	num = va_arg(list, unsigned int);
+
+	if (num == 0)
+		return (_write_char('0'));
+	if (num < 1)
+		return (-1);
+	len = base_len(num, 16);
+	hex_rep = malloc(sizeof(char) * len + 1);
+	if (hex_rep == NULL)
+		return (-1);
+	for (len = 0; num > 0; len++)
+	{
+		rem_num = num % 16;
+		if (rem_num > 9)
+		{
+			rem_num = hex_check(rem_num, 'X');
+			hex_rep[len] = rem_num;
+		}
+		else
+			hex_rep[len] = rem_num + 48;
+		num = num / 16;
+	}
+	hex_rep[len] = '\0';
+	rev_hex = rev_string(hex_rep);
+	if (rev_hex == NULL)
+		return (-1);
+	write_base(rev_hex);
+	free(hex_rep);
+	free(rev_hex);
+	return (len);
+}
+
+/**
+ * hex_check - Checks which hex function is calling it
+ * @num: Number to convert into letter
+ * @x: Tells which hex function is calling it
+ * Return: Ascii value for a letter
+ */
+int hex_check(int num, char x)
+{
+	char *hex = "abcdef";
+	char *Hex = "ABCDEF";
+
+	num = num - 10;
+	if (x == 'x')
+		return (hex[num]);
+	else
+		return (Hex[num]);
+	return (0);
 }
