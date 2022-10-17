@@ -1,4 +1,4 @@
-
+int hex_check(int, char);
 /**
  * print_hex - Prints a representation of a decimal number on base16 lowercase
  * @list: List of the arguments passed to the function
