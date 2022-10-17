@@ -30,58 +30,53 @@ if (str == NULL)
 else if (*str == '\0')
 	return (-1);
 
-for (i = 0; str[i]; i++)
+for (i = 0; str[i] != '\0'; i++)
 	_putchar(str[i]);
 
 return (i);
 }
 
 /**
- * print_int - prints an integer
- * @arg: argument
- * Return: 0
+ * print_percent - Prints a percent symbol
+ * @list: list of arguments
+ * Return: Will return the amount of characters printed.
  */
-
-int print_int(va_list arg)
+int print_percent(__attribute__((unused))va_list list)
 {
-	unsigned int divisor = 1, i, resp, charPrinted = 0;
-	int n = va_arg(arg, int);
-
-	if (n < 0)
-	{
-		_putchar('-');
-		charPrinted++;
-		n *= -1;
-	}
-
-	for (i = 0; n / divisor > 9; i++, divisor *= 10)
-	;
-	for (; divisor >= 1; n %= divisor, divisor /= 10, charPrinted++)
-	{
-		resp = n / divisor;
-		_putchar('0' + resp);
-	}
-	return (charPrinted);
+	_write_char('%');
+	return (1);
 }
 
 /**
- * print_unsigned - prints an unigned int
- * @arg: argument
- * Return: 0
+ * print_integer - Prints an integer
+ * @list: list of arguments
+ * Return: Will return the amount of characters printed.
  */
-int print_unsigned(va_list arg)
+int print_integer(va_list arg)
 {
-	int divisor = 1, i, resp;
-	unsigned int n = va_arg(arg, unsigned int);
+	int num_length;
 
-	for (i = 0; n / divisor > 9; i++, divisor *= 10)
-		;
-	for (; divisor >= 1; n %= divisor, divisor /= 10)
-	{
-		resp = n / divisor;
-		_putchar('0' + resp);
-	}
-	return (i + 1);
+	num_length = print_number(arg);
+	return (num_length);
+}
+
+/**
+ * unsigned_integer - Prints Unsigned integers
+ * @list: List of all of the argumets
+ * Return: a count of the numbers
+ */
+int unsigned_integer(va_list arg)
+{
+	unsigned int num;
+
+	num = va_arg(list, unsigned int);
+
+	if (num == 0)
+		return (print_unsgined_number(num));
+
+	if (num < 1)
+		return (-1);
+	return (print_unsgined_number(num));
 }
 
 /**
