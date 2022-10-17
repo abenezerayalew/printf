@@ -23,7 +23,9 @@ int printIdentifiers(char next, va_list arg)
 		{"x", print_hex},
 		{"X", print_HEX},
 		{"S", print_STR},
-
+		/*{"r", print_reversed},*/
+		/*{"R", rot13},*/
+		/*{"%", print_percent},*/
 		{NULL, NULL}
 	};
 
