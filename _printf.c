@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 /**
- * printIdentifiers - prints special characters
+ * printIdentifiers - prints special character
  * @next: character after the %
  * @arg: argument for the indentifier
  * Return: the number of characters printed
