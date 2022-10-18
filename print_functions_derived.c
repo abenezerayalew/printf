@@ -1,92 +1,74 @@
-#include "main.h"
-#include <stdarg.h>
-#include <stdlib.h>
-
 /**
- * print_unsignedToBinary - prints an integer.
- * @arg: argument
- * Return: 0
+ *prente_o - prints in oct format
+ *@args: argumenrs
+ *Return: print numbers
  */
-int print_unsignedToBinary(va_list arg)
+int prente_o(va_list args)
 {
-
-unsigned int n = va_arg(arg, unsigned int);
-unsigned int printed;
-
-print_binary(n, &printed);
-print_binary(n, &printed);
-
-return (printed);
+  unsigned int a[11];
+  unsigned int i, m, n, sum;
+  int count;
+  n = va_arg(args, unsigned int);
+  m = 1073741824;
+  a[0] = n / m;
+  for (i = 1; i < 11; i++)
+    {
+      m /= 8;
+      a[i] = (n / m) % 8;
+    }
+  for (i = 0, sum = 0, count = 0; i < 11; i++)
+    {
+      sum += a[i];
+      if (sum || i == 10)
+	{
+	  _putchar('0' + a[i]);
+	  count++;
+	}
+    }
+  return (count);
 }
-
-
 /**
- * print_oct - prints number in octal base.
- * @arg: list containing octal number to be printed
- * Return: number of octals printed
+ *prente_u - prints in oct format
+ *@args: argumenrs
+ *Return: print numbers
  */
-
-int print_oct(va_list arg)
+int prente_u(va_list args)
 {
-	unsigned int num = va_arg(arg, unsigned int);
-	unsigned int copy;
-	char *octa;
-	int i, j, charPrinted = 0;
-
-	if (num == 0)
-		return (_putchar('0'));
-	for (copy = num; copy != 0; j++)
-	{
-		copy = copy / 8;
-	}
-	octa = malloc(j);
-	if (!octa)
-		return (-1);
-
-	for (i = j - 1; i >= 0; i--)
-	{
-		octa[i] = num % 8 + '0';
-		num = num / 8;
-	}
-
-	for (i = 0; i < j && octa[i] == '0'; i++)
-		;
-	for (; i < j; i++)
-	{
-		_putchar(octa[i]);
-		charPrinted++;
-	}
-	free(octa);
-	return (charPrinted);
+unsigned int n = va_arg(args, unsigned int);
+int num, last = n % 10, digit, exp = 1;
+int  i = 1;
+if (n == 0)
+{
+_putchar(48);
+ return (1);
+ }
+n = n / 10;
+num = n;
+if (last < 0)
+{
+_putchar('-');
+num = -num;
+n = -n;
+last = -last;
+i++;
 }
-
-/**
- * print_unsignedIntToHex - prints unsigned int to hexadecimal.
- * @num: number to print
- * @_case: letter `a` on the case to print it (upper or lower)
- * Return: number or char printed
- */
-int print_unsignedIntToHex(unsigned int num, char _case)
+if (num > 0)
 {
-	unsigned int num2;
-	int i, j, remainder, nbrCharacters = 0;
-	char *numhex;
-
-	for (num2 = num; num2 != 0; nbrCharacters++, num2 /= 16)
-	;
-
-	numhex = malloc(nbrCharacters);
-	for (i = 0; num != 0; i++)
-	{
-		remainder = num % 16;
-		if (remainder < 10)
-			numhex[i] = remainder + '0';
-		else
-			numhex[i] = remainder - 10 + _case;
-		num = num / 16;
-	}
-	for (j = i - 1; j >= 0; j--)
-		_putchar(numhex[j]);
-	free(numhex);
-	return (nbrCharacters);
+while (num / 10 != 0)
+{
+exp = exp * 10;
+num = num / 10;
+}
+num = n;
+while (exp > 0)
+{
+digit = num / exp;
+_putchar(digit + '0');
+num -= (digit * exp);
+exp = exp / 10;
+i++;
+}
+}
+_putchar(last + '0');
+return (i);
 }
