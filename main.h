@@ -1,36 +1,36 @@
-#ifndef MAIN_H
-#define MAIN_H
-
+#ifndef _MAIN_H_
+#define _MAIN_H_
 #include <stdarg.h>
-#include <stdio.h>
-
-#include <stdarg.h>
-
-int _putchar(char c);
-int print_int(va_list arg);
-int print_unsigned(va_list arg);
+#include <stdlib.h>
+int prente_xx(unsigned long int num);
+int print_hex(unsigned int n, unsigned int c);
 int _printf(const char *format, ...);
-int print_char(va_list arg);
-int print_str(va_list arg);
-int print_percent(void);
-void print_binary(unsigned int n, unsigned int *printed);
-int print_unsignedToBinary(va_list arg);
-int print_oct(va_list arg);
-int print_unsignedIntToHex(unsigned int num, char _case);
-int print_hex_base(va_list arg, char _case);
-int print_hex(va_list arg);
-int print_HEX(va_list arg);
-int print_STR(va_list arg);
-
+int prente_rot(va_list args);
+int prente_c(va_list args);
+int prente_s(va_list args);
+int prente_p(va_list args);
+int prente_po(va_list args);
+int _putchar(char c);
+int prente_r(va_list args);
+int prente_b(va_list args);
+int prente_d(va_list args);
+int prente_i(va_list args);
+int prente_x(va_list args);
+int prente_S(va_list args);
+int s(char c);
+int prente_X(va_list args);
+int prente_o(va_list args);
+int prente_u(va_list args);
 /**
- * struct identifierStruct - structure definition of a printTypeStruct
- * @indentifier: type
- * @printer: function to print
+ *struct select - match the conversion specifiers for printf
+ *@select: type char pointer of the specifier
+ *@foo: type pointer to function for the conversion specifier
+ *
  */
-typedef struct identifierStruct
+typedef struct select
 {
-char *indentifier;
-int (*printer)(va_list);
-} identifierStruct;
-
+char *select;
+int (*foo)(va_list args);
+} select_p;
+int finder(const char *format, select_p selects[], va_list args);
 #endif
