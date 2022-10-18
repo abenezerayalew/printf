@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * print_hex_base - base function for printing hexadecimal numbers
+ * print_hex_base - base function for printing hexadecimal number
  * @arg: argument list containing hexadecimal
  * @_case: a  in caps on lower, printing the hex number in caps in lower
  * Return: number of digits printed
