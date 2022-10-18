@@ -1,41 +1,57 @@
 #include "main.h"
-
 /**
- * print_hex_base - base function for printing hexadecimal numbers
- * @arg: argument list containing hexadecimal
- * @_case: a  in caps on lower, printing the hex number in caps in lower
+ * print_hex - prints an unsigned int in hexidecimal form
+ * @n: unsigned int to print
+ * @c: flag to determine case of printing (0 = lower, 1 = upper)
+ *
  * Return: number of digits printed
  */
-
-int print_hex_base(va_list arg, char _case)
+int print_hex(unsigned int n, unsigned int c)
 {
-	unsigned int num = va_arg(arg, unsigned int);
-	int nbrCharacters;
-
-	if (num == 0)
-		return (_putchar('0'));
-	nbrCharacters = print_unsignedIntToHex(num, _case);
-
-	return (nbrCharacters);
+unsigned int a[8];
+unsigned int i, m, sum;
+char diff;
+int count;
+m = 268435456;
+if (c)
+diff = 'A' - ':';
+else
+diff = 'a' - ':';
+a[0] = n / m;
+for (i = 1; i < 8; i++)
+{
+m /= 16;
+a[i] = (n / m) % 16;
+}
+for (i = 0, sum = 0, count = 0; i < 8; i++)
+{
+sum += a[i];
+if (sum || i == 7)
+{
+if (a[i] < 10)
+_putchar('0' + a[i]);
+else
+_putchar('0' + diff + a[i]);
+count++;
+}
+}
+return (count);
 }
 /**
- * print_hex - prints a hexadecimal in lower case
- * @arg: list that contains hexadecimal to print
+ * print_x - takes an unsigned int and prints it in lowercase hex notation
+ *@args: unsigned int to print
  * Return: number of digits printed
- */
-
-int print_hex(va_list arg)
+*/
+int prente_x(va_list args)
 {
-	return (print_hex_base(arg, 'a'));
+return (print_hex(va_arg(args, unsigned int), 0));
 }
-
 /**
- * print_HEX - prints a hexadecimal in upper case
- * @arg: list that contains hexadecimal to print
+ * print_X - takes am unsigned int and prints it in uppercase hex notation
+ * @args: unsigned int to print
  * Return: number of digits printed
- */
-
-int print_HEX(va_list arg)
+*/
+int prente_X(va_list args)
 {
-	return (print_hex_base(arg, 'A'));
+return (print_hex(va_arg(args, unsigned int), 1));
 }
